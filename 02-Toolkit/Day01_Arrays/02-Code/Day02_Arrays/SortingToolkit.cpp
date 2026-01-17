@@ -1,4 +1,4 @@
-//merge sort
+//merge sort one of best sort as in comparision sort algorithums atleat O(nlog(n)) where as in merger sort it is common.
 #include <iostream>
 #include <vector>
 using namespace std;
