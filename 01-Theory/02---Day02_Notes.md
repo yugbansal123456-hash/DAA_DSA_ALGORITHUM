@@ -48,3 +48,41 @@ Therefore, the recursion costs the system 1280 bytes (≈1.25 KB) of stack memor
 Stability: Why is Merge Sort considered "Stable" while Quicksort is not? Give a real-world scenario (like sorting a list of names by age) where this matters.
 ---
 Merge Sort is considered a stable sorting algorithm because when two elements have the same key, it preserves their original order during the merge step. For example, if you are sorting employees by age and the list contains (Alice, 25) followed by (Bob, 25), Merge Sort will ensure Alice still comes before Bob after sorting. Quicksort, on the other hand, is not stable because its partitioning process can swap equal elements across different partitions, potentially reversing their order. This distinction matters in real-world scenarios such as sorting a list of names by age and then by department. With a stable sort like Merge Sort, if two employees are both 25 years old, their relative order by department remains consistent, allowing secondary sorting criteria to be applied correctly. In contrast, Quicksort might shuffle equal ages, breaking the intended multi-level sort.
+
+
+
+7---------------------------------------------------------------------
+Master Method to solve the recurrence for Merge Sort: T(n) = 2T(n/2) + n. Identify which of the three cases it falls under.
+---
+a=b=2 ,f(n)=n
+w(n)=n
+f(n)=w(n)(logn)^0 .so case2 now
+O(nlogn)
+
+
+8-----------------------------------------------------------------------
+explain why Merge Sort is O(n) space. If you were on a system with only 1KB of RAM, would you still use it?
+---
+Merge Sort requires O(n) extra space because during the merge step it needs a temporary buffer to hold elements while combining two sorted halves. Even if you reuse a single buffer across all recursive calls, the algorithm still demands additional memory proportional to the input size. This makes Merge Sort unsuitable for systems with extremely limited memory. For example, if you only had 1KB of RAM, you could not sort arrays larger than a few hundred integers because the temporary buffer alone would exceed the available memory.
+1KB=1024bytes ,1 int require 4 bytes . so in 1KB atmost 256 number stored .
+required space =O(n)[merge part]+O(logn)[recurssive stack call] =O(n)[dominant]
+In such constrained environments, in‑place algorithms like Quick Sort or Heap Sort are preferred since they require only     O(1) extra space, even though their time complexity is similar. Merge Sort’s strength lies in its predictable O(nlog n) performance and cache‑friendly linear access, but its space overhead is the trade‑off that prevents it from being practical on very low‑memory systems.
+
+
+9---------------------------------------------------------------------------
+The Master Method Check: Solve T1(n) = 4T1(n/2) + n^2 and T2(n) = 2T2(n/2) + n^3.
+---
+T1->w(n)=n^2=f(n) .case 2 so O(n^2logn)
+T2->w(n)=n  < f(n) .case 3 now condition n^3/4< cn^3 for c=1/2 .so O(n^3).
+
+
+10-------------------------------------------------------------------------
+Calculate the stack space for a recursion depth of \log _2n.
+---
+When analyzing recursion depth, the stack space used depends on how many recursive calls are active at once. Each call consumes a fixed amount of memory for its activation record, so the total stack space is proportional to the recursion depth. For divide‑and‑conquer algorithms such as Merge Sort or Binary Search, the recursion depth is \log _2n. This means the stack space grows as O(\log n), since each level of recursion adds one frame to the stack. In practice, if each frame requires a constant amount of memory, the total stack usage is that constant multiplied by \log _2n. Thus, the stack grows slowly compared to the input size, making these algorithms efficient in terms of memory overhead.
+
+
+11---------------------------------------------------------------------------
+Stack Math: If n=1,048,576, what is the maximum depth of your Merge Sort recursion?                                    In-Place: Why is Merge Sort usually not "In-Place" (O(n) space), and how does that compare to the Array problems from yesterday?
+---
+For an input size of n=1,048,576 , the maximum recursion depth of Merge Sort is log _2 n=20. This means that at most 20 stack frames are active at once, which is relatively small compared to the size of the array. The real limitation of Merge Sort is not its stack usage but its auxiliary memory requirement. Merge Sort is not considered in‑place because it needs an additional buffer of size O(n) to perform merging, whereas in‑place algorithms like Quick Sort or Heap Sort rearrange elements using only constant extra space. This difference highlights why Merge Sort, despite its predictable O(nlog n) performance and cache‑friendly access pattern, is less suitable for systems with tight memory constraints compared to the array problems you solved yesterday, which often rely on pointer manipulation or counting and achieve their results with O(1) extra space.
