@@ -24,3 +24,6 @@ void sortArray(vector<int>& nums) {
     vector<int> temp(nums.size()); // allocate once
     mergeSort(nums, 0, nums.size()-1, temp);
 }
+
+//try with INT_MAX in merge part also
+//also when n<=15 we can use insertion sort
