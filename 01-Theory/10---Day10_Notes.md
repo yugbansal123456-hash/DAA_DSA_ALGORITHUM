@@ -1,0 +1,1 @@
+Black Height Math: Prove that a red-black tree with $n$ internal nodes has height at most $2\log(n+1)$.Rotation Invariant: Does a rotation change the Inorder Traversal of a tree? (Hint: Try it on paper).The "Uncle" Rule: In RB-INSERT-FIXUP, why do we care specifically about the color of the uncle node?
